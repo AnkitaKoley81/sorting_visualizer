@@ -10,7 +10,8 @@ function Quick()
 
     c_delay=0;
 
-    quick_sort(0,array_size-1);
+     quick_sort(0,array_size-1);
+    // quickSort(0,array_size-1);
 
     enable_buttons();
 }

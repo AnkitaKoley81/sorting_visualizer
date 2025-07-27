@@ -31,7 +31,7 @@ function swap(i,j)
     div_update(divs[j],div_sizes[j],"blue");//Color update
 }
 
-function max_heapify(n,i)
+function max_heapify(n,i) // i means currIdx
 {
     var largest=i;
     var l=2*i+1;
@@ -90,9 +90,3 @@ function heap_sort()
     div_update(divs[i],div_sizes[i],"green");//Color update
 }
 
-/*
-    *****************
-    DONE BY:-   TUMMALA KETHAN
-    
-    *****************
-*/

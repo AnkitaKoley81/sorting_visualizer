@@ -35,7 +35,7 @@ function Insertion()
             {
                 div_update(divs[i+1],div_sizes[i+1],"blue");//Color update
             }
-            i-=1;
+            i=i-1;
         }
         div_sizes[i+1]=key;
 

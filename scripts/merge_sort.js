@@ -15,53 +15,49 @@ function Merge()
     enable_buttons();
 }
 
-function merge_sort(start,mid,end)
-{
-    var p=start,q=mid+1;
 
-    var Arr=[],k=0;
+function merge_sort(start, mid, end) {
+    let left = start;
+    let right = mid + 1;
+    let temp = [];
 
-    for(var i=start; i<=end; i++)
-    {
-        if(p>mid)
-        {
-            Arr[k++]=div_sizes[q++];
-            div_update(divs[q-1],div_sizes[q-1],"red");//Color update
-        }
-        else if(q>end)
-        {
-            Arr[k++]=div_sizes[p++];
-            div_update(divs[p-1],div_sizes[p-1],"red");//Color update
-        }
-        else if(div_sizes[p]<div_sizes[q])
-        {
-            Arr[k++]=div_sizes[p++];
-            div_update(divs[p-1],div_sizes[p-1],"red");//Color update
-        }
-        else
-        {
-            Arr[k++]=div_sizes[q++];
-            div_update(divs[q-1],div_sizes[q-1],"red");//Color update
+    while (left <= mid && right <= end) {
+        if (div_sizes[left] < div_sizes[right]) {
+            temp.push(div_sizes[left]);
+            div_update(divs[left], div_sizes[left], "red");
+            left++;
+        } else {
+            temp.push(div_sizes[right]);
+            div_update(divs[right], div_sizes[right], "red");
+            right++;
         }
     }
 
-    for(var t=0;t<k;t++)
-    {
-        div_sizes[start++]=Arr[t];
-        div_update(divs[start-1],div_sizes[start-1],"green");//Color update
+    while (left <= mid) {
+        temp.push(div_sizes[left]);
+        div_update(divs[left], div_sizes[left], "red");
+        left++;
+    }
+
+    while (right <= end) {
+        temp.push(div_sizes[right]);
+        div_update(divs[right], div_sizes[right], "red");
+        right++;
+    }
+
+    for (let i = start; i <= end; i++) {
+        div_sizes[i] = temp[i - start];
+        div_update(divs[i], div_sizes[i], "green");
     }
 }
+function merge_partition(start, end) {
+    if (start < end) {
+        let mid = Math.floor((start + end) / 2);
+        div_update(divs[mid], div_sizes[mid], "yellow");
 
-function merge_partition(start,end)
-{
-    if(start < end)
-    {
-        var mid=Math.floor((start + end) / 2);
-        div_update(divs[mid],div_sizes[mid],"yellow");//Color update
+        merge_partition(start, mid);
+        merge_partition(mid + 1, end);
 
-        merge_partition(start,mid);
-        merge_partition(mid+1,end);
-
-        merge_sort(start,mid,end);
+        merge_sort(start, mid, end);
     }
 }
